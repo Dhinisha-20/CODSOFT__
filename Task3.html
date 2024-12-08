@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trial dude</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            height: 100vh;
+            background-color: antiquewhite;
+            background: radial-gradient(rgb(179, 167, 167), rgb(106, 98, 93), rgb(18, 18, 17));
+        }
+        .calc{
+            
+            width:300px;
+            border-radius: 5px;
+            padding:3px;
+            background-color:black;
+            border: 2px white solid;
+        }
+        input{
+            font:30px cursive;
+
+        }
+        #display{ 
+            text-align: right;
+            width:97.5%;
+            height:84px;
+            font: cursive 50px;
+            background-color: black;
+            color:white;
+            border: white 2px solid;
+        }
+        .keys{
+            display:grid;
+            grid-template-columns: repeat(4,1fr);
+            width:auto;
+            height:400px;
+        }
+        button{
+            font-size: 20px;
+            font-family: cursive;
+            border-radius: 25%;
+            margin:3px;
+        }
+        button:hover{
+            text-shadow: 1px 1px 1px black;
+            border-radius:35%
+        }
+        #add{
+            grid-row: span 2 ;
+            padding:5px;
+            border-radius: 15%;
+        }
+    </style>
+    <script>
+        var num = document.getElementById('display');
+        function numberss(num){
+            display.value +=num;
+        }
+        function oper(operator){
+            display.value+= " "+operator+" ";
+        }
+        function clrD(){
+            display.value = '';
+        }
+        function deleteLast(){
+            display.value = display.value.slice(0, -1);
+        }
+        function calcResult(){
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+        function dotOper() {
+            let currentValue = display.value;
+            if (!currentValue.includes('.')) {
+            display.value += '.';
+        }
+        }
+        function percentageOper(){
+            let currentValue = parseFloat(display.value); 
+            if (!isNaN(currentValue)) { 
+                display.value = (currentValue / 100).toString();
+            }
+        }
+        
+
+    </script>
+</head>
+<body>
+    <div class="calc">
+        <div class="calc-display">
+            <input id="display" type="text" disabled>
+        </div>
+    </br>
+        <div class="keys">
+            <button onclick="clrD()">AC</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button class="operation" onclick="percentageOper('%')">%</button>
+            <button class="operation" onclick="oper('/')">/</button>
+        
+            <button class="number" onclick="numberss('7')">7</button>
+            <button class="number" onclick="numberss('8')">8</button>
+            <button class="number" onclick="numberss('9')">9</button>
+            <button class="operation" onclick="oper('*')">x</button>
+                
+            <button class="number" onclick="numberss('4')">4</button>
+            <button class="number" onclick="numberss('5')">5</button>
+            <button class="number" onclick="numberss('6')">6</button>
+            <button class="operation" onclick="oper('-')">-</button>
+               
+            <button class="number" onclick="numberss('1')">1</button>
+            <button class="number" onclick="numberss('2')">2</button>
+            <button class="number" onclick="numberss('3')">3</button>
+            <button class="operation" id="add" onclick="oper('+')">+</button>
+
+            <button onclick="dotOper()">.</button>
+            <button class="number" onclick="numberss('0')">0</button>
+            <button class="operation" onclick="calcResult()">=</button>
+
+        </div>
+    </div>
+</body>
+</html>
